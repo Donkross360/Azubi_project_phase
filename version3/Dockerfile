@@ -8,18 +8,9 @@ COPY *.php style.css ./
 
 RUN chmod 644 ./*php style.css
 
-RUN apt-get update && apt-get install -y php-dev libpq-dev git
+RUN apt-get update && apt-get install -y
 
-RUN git clone https://github.com/arnaud-lb/php-getenv.git && \
-    cd php-getenv && \
-    phpize && \
-    ./configure && \
-    make && \
-    make install
-
-
-RUN echo "extension=getenv.so" > /usr/local/etc/php/conf.d/getenv.ini
-RUN service apache2 restart
+RUN apt-get install git -y
 
 # install Composer in the current directory
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
